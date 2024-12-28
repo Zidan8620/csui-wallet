@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$CSUI Wallet</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the $CSUI Wallet</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="admin.html">Admin Panel</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="wallet-info">
+            <h2>Your $CSUI Wallet</h2>
+            <button id="create-wallet-btn">Create New Wallet</button>
+            <button id="access-wallet-btn">Access Existing Wallet</button>
+
+            <div id="create-wallet-section" style="display:none;">
+                <h3>Create a New Wallet</h3>
+                <p id="new-wallet-info"></p>
+            </div>
+
+            <div id="access-wallet-section" style="display:none;">
+                <h3>Access Your Existing Wallet</h3>
+                <form id="access-wallet-form">
+                    <label for="existing-address">Wallet Address:</label>
+                    <input type="text" id="existing-address" required>
+                    
+                    <label for="existing-private-key">Private Key:</label>
+                    <input type="text" id="existing-private-key" required>
+                    
+                    <button type="submit">Access Wallet</button>
+                </form>
+                <p id="existing-wallet-info"></p>
+            </div>
+
+            <p id="wallet-info"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 $CSUI Wallet. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Create New Wallet
+        document.getElementById('create-wallet-btn').addEventListener('click', function () {
+            const wallet = ethers.Wallet.createRandom();
+            const walletInfo = `
+                <p><strong>New Wallet Created!</strong></p>
+                <p>Address: ${wallet.address}</p>
+                <p>Private Key: ${wallet.privateKey}</p>
+            `;
+            document.getElementById('new-wallet-info').innerHTML = walletInfo;
+            document.getElementById('create-wallet-section').style.display = 'block';
+            document.getElementById('access-wallet-section').style.display = 'none';
+            document.getElementById('wallet-info').innerHTML = ''; // Clear previous info
+        });
+
+        // Show the Access Wallet section
+        document.getElementById('access-wallet-btn').addEventListener('click', function () {
+            document.getElementById('access-wallet-section').style.display = 'block';
+            document.getElementById('create-wallet-section').style.display = 'none';
+            document.getElementById('wallet-info').innerHTML = ''; // Clear previous info
+        });
+
+        // Handle Accessing an Existing Wallet
+        document.getElementById('access-wallet-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const address = document.getElementById('existing-address').value;
+            const privateKey = document.getElementById('existing-private-key').value;
+
+            try {
+                const wallet = new ethers.Wallet(privateKey);
+                
+                if (wallet.address.toLowerCase() === address.toLowerCase()) {
+                    const walletInfo = `
+                        <p><strong>Wallet Accessed Successfully!</strong></p>
+                        <p>Address: ${wallet.address}</p>
+                        <p>Balance: Fetching balance...</p>
+                    `;
+                    
+                    // Display wallet info
+                    document.getElementById('existing-wallet-info').innerHTML = walletInfo;
+
+                    // Fetch balance from the network
+                    const provider = ethers.getDefaultProvider('mainnet');
+                    provider.getBalance(wallet.address).then(balance => {
+                        const balanceInEther = ethers.utils.formatEther(balance);
+                        document.getElementById('existing-wallet-info').innerHTML += `
+                            <p>Balance: ${balanceInEther} ETH</p>
+                        `;
+                    });
+                } else {
+                    alert('Invalid private key or address!');
+                }
+            } catch (error) {
+                alert('Invalid private key!');
+            }
+        });
+    </script>
+</body>
+</html>
