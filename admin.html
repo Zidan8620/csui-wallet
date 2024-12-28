@@ -3,52 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Admin Panel - $CSUI Wallet</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Admin Panel</h1>
+        <nav>
+            <div class="logo">
+                <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wallet.html">Wallet</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <div id="admin-dashboard">
-            <h2>Admin Dashboard</h2>
-            <p>Welcome to the $CSUI Wallet Admin Panel.</p>
-
-            <form id="transaction-form">
-                <label for="to-wallet">Wallet Address</label>
-                <input type="text" id="to-wallet" required>
-                <label for="amount">Amount to Send</label>
-                <input type="number" id="amount" required>
-                <button type="submit">Send Transaction</button>
-            </form>
-        </div>
-    </main>
+    <section class="admin-login">
+        <h1>Admin Login</h1>
+        <form id="admin-login-form">
+            <label for="admin-password">Enter Admin Password:</label>
+            <input type="password" id="admin-password" placeholder="Password" required>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div id="error-message" style="color: red; display: none;">Incorrect password. Please try again.</div>
+    </section>
 
     <footer>
         <p>&copy; 2024 $CSUI Wallet. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        // Basic authentication prompt
-        const password = prompt("Enter the admin password:");
-
-        // Simple check (Change 'yourpassword' to your actual admin password)
-        if (password !== 'FAQu@123) {
-            alert("Access denied!");
-            window.location.href = "index.html"; // Redirect to the main page
-        }
-
-        // Add your admin functionality here (e.g., sending transactions)
-        document.getElementById('transaction-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const wallet = document.getElementById('to-wallet').value;
-            const amount = document.getElementById('amount').value;
-
-            // Add your transaction logic here (no real backend call for now)
-            alert(`Transaction sent to ${wallet} for ${amount} $CSUI!`);
-        });
-    </script>
+    <script src="admin.js"></script>
 </body>
 </html>
