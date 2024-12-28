@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - $CSUI Wallet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wallet.html">Wallet</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome to the admin panel. Here you can manage wallet activities.</p>
+        <!-- Example Admin Functions -->
+        <div class="admin-actions">
+            <h2>Manage Transactions</h2>
+            <form id="send-coins-form">
+                <label for="admin-wallet-address">Wallet Address:</label>
+                <input type="text" id="admin-wallet-address" placeholder="Recipient Wallet Address" required>
+                <label for="admin-amount">Amount ($CSUI):</label>
+                <input type="number" id="admin-amount" placeholder="Amount to send" required>
+                <button type="submit" class="btn">Send Tokens</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 $CSUI Wallet. All Rights Reserved.</p>
+    </footer>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
