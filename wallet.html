@@ -14,7 +14,6 @@
             </div>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="wallet.html">Create Wallet</a></li>
                 <li><a href="admin.html">Admin</a></li>
             </ul>
         </nav>
@@ -22,6 +21,8 @@
 
     <section class="wallet-create">
         <h1 id="form-title">Create a New Wallet</h1>
+
+        <!-- Form to Create Wallet -->
         <form id="wallet-form">
             <label for="wallet-name">Wallet Name:</label>
             <input type="text" id="wallet-name" placeholder="Enter Wallet Name" required>
@@ -34,7 +35,8 @@
             
             <button type="submit" class="btn">Create Wallet</button>
         </form>
-        
+
+        <!-- Form to View Existing Wallet -->
         <form id="existing-wallet-form" style="display:none;">
             <label for="existing-wallet-name">Wallet Name:</label>
             <input type="text" id="existing-wallet-name" placeholder="Enter Existing Wallet Name" required>
