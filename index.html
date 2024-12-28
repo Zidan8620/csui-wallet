@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$CSUI Wallet</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Welcome to the $CSUI Wallet</h1>
+        <h1>$CSUI Wallet</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="admin.html">Admin Panel</a>
@@ -17,32 +16,40 @@
     </header>
 
     <main>
-        <section class="wallet-info">
-            <h2>Your $CSUI Wallet</h2>
+        <section id="user-wallet">
+            <h2>Your Wallet</h2>
+            <div id="wallet-info">
+                <p><strong>Wallet Address:</strong> <span id="wallet-address">0x0000000000000000000000000000000000000000</span></p>
+                <p><strong>Balance:</strong> <span id="wallet-balance">0</span> $CSUI</p>
+            </div>
             <button id="create-wallet-btn">Create New Wallet</button>
-            <button id="access-wallet-btn">Access Existing Wallet</button>
-
-            <div id="create-wallet-section" style="display:none;">
-                <h3>Create a New Wallet</h3>
-                <p id="new-wallet-info"></p>
-            </div>
-
-            <div id="access-wallet-section" style="display:none;">
-                <h3>Access Your Existing Wallet</h3>
-                <form id="access-wallet-form">
-                    <label for="existing-address">Wallet Address:</label>
-                    <input type="text" id="existing-address" required>
-                    
-                    <label for="existing-private-key">Private Key:</label>
-                    <input type="text" id="existing-private-key" required>
-                    
-                    <button type="submit">Access Wallet</button>
-                </form>
-                <p id="existing-wallet-info"></p>
-            </div>
-
-            <p id="wallet-info"></p>
+            <button id="view-wallet-btn">View Existing Wallet</button>
         </section>
+
+        <!-- Create New Wallet Modal -->
+        <div id="create-wallet-modal" style="display: none;">
+            <h3>Create New Wallet</h3>
+            <form id="create-wallet-form">
+                <label for="new-wallet-password">Password</label>
+                <input type="password" id="new-wallet-password" required>
+                <button type="submit">Create Wallet</button>
+            </form>
+            <button id="close-create-wallet-modal">Close</button>
+        </div>
+
+        <!-- Existing Wallet Modal -->
+        <div id="existing-wallet-modal" style="display: none;">
+            <h3>View Existing Wallet</h3>
+            <form id="existing-wallet-form">
+                <label for="existing-wallet-address">Wallet Address</label>
+                <input type="text" id="existing-wallet-address" required>
+                <label for="existing-wallet-password">Password</label>
+                <input type="password" id="existing-wallet-password" required>
+                <button type="submit">View Wallet</button>
+            </form>
+            <button id="close-existing-wallet-modal">Close</button>
+        </div>
+
     </main>
 
     <footer>
@@ -50,59 +57,67 @@
     </footer>
 
     <script>
-        // Create New Wallet
-        document.getElementById('create-wallet-btn').addEventListener('click', function () {
-            const wallet = ethers.Wallet.createRandom();
-            const walletInfo = `
-                <p><strong>New Wallet Created!</strong></p>
-                <p>Address: ${wallet.address}</p>
-                <p>Private Key: ${wallet.privateKey}</p>
-            `;
-            document.getElementById('new-wallet-info').innerHTML = walletInfo;
-            document.getElementById('create-wallet-section').style.display = 'block';
-            document.getElementById('access-wallet-section').style.display = 'none';
-            document.getElementById('wallet-info').innerHTML = ''; // Clear previous info
+        const createWalletBtn = document.getElementById('create-wallet-btn');
+        const viewWalletBtn = document.getElementById('view-wallet-btn');
+        const createWalletModal = document.getElementById('create-wallet-modal');
+        const existingWalletModal = document.getElementById('existing-wallet-modal');
+        const closeCreateWalletModal = document.getElementById('close-create-wallet-modal');
+        const closeExistingWalletModal = document.getElementById('close-existing-wallet-modal');
+        const walletAddressElem = document.getElementById('wallet-address');
+        const walletBalanceElem = document.getElementById('wallet-balance');
+
+        // For demonstration, simulate wallet data
+        let walletAddress = '0x0000000000000000000000000000000000000000';
+        let walletBalance = 0;
+
+        // Function to simulate wallet creation
+        createWalletBtn.addEventListener('click', function () {
+            createWalletModal.style.display = 'block';
         });
 
-        // Show the Access Wallet section
-        document.getElementById('access-wallet-btn').addEventListener('click', function () {
-            document.getElementById('access-wallet-section').style.display = 'block';
-            document.getElementById('create-wallet-section').style.display = 'none';
-            document.getElementById('wallet-info').innerHTML = ''; // Clear previous info
+        // Function to simulate viewing an existing wallet
+        viewWalletBtn.addEventListener('click', function () {
+            existingWalletModal.style.display = 'block';
         });
 
-        // Handle Accessing an Existing Wallet
-        document.getElementById('access-wallet-form').addEventListener('submit', function (e) {
+        // Close modal for creating a wallet
+        closeCreateWalletModal.addEventListener('click', function () {
+            createWalletModal.style.display = 'none';
+        });
+
+        // Close modal for existing wallet
+        closeExistingWalletModal.addEventListener('click', function () {
+            existingWalletModal.style.display = 'none';
+        });
+
+        // Simulate wallet creation
+        document.getElementById('create-wallet-form').addEventListener('submit', function (e) {
             e.preventDefault();
-            const address = document.getElementById('existing-address').value;
-            const privateKey = document.getElementById('existing-private-key').value;
+            const password = document.getElementById('new-wallet-password').value;
 
-            try {
-                const wallet = new ethers.Wallet(privateKey);
-                
-                if (wallet.address.toLowerCase() === address.toLowerCase()) {
-                    const walletInfo = `
-                        <p><strong>Wallet Accessed Successfully!</strong></p>
-                        <p>Address: ${wallet.address}</p>
-                        <p>Balance: Fetching balance...</p>
-                    `;
-                    
-                    // Display wallet info
-                    document.getElementById('existing-wallet-info').innerHTML = walletInfo;
+            if (password) {
+                walletAddress = '0x' + Math.random().toString(16).slice(2, 42); // Generate random wallet address
+                walletBalance = 1000; // Simulate initial balance
+                walletAddressElem.textContent = walletAddress;
+                walletBalanceElem.textContent = walletBalance;
 
-                    // Fetch balance from the network
-                    const provider = ethers.getDefaultProvider('mainnet');
-                    provider.getBalance(wallet.address).then(balance => {
-                        const balanceInEther = ethers.utils.formatEther(balance);
-                        document.getElementById('existing-wallet-info').innerHTML += `
-                            <p>Balance: ${balanceInEther} ETH</p>
-                        `;
-                    });
-                } else {
-                    alert('Invalid private key or address!');
-                }
-            } catch (error) {
-                alert('Invalid private key!');
+                createWalletModal.style.display = 'none';
+            }
+        });
+
+        // Simulate viewing an existing wallet
+        document.getElementById('existing-wallet-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const existingWalletAddress = document.getElementById('existing-wallet-address').value;
+            const existingWalletPassword = document.getElementById('existing-wallet-password').value;
+
+            // Simulate checking password and address
+            if (existingWalletAddress === walletAddress && existingWalletPassword) {
+                walletAddressElem.textContent = walletAddress;
+                walletBalanceElem.textContent = walletBalance;
+                existingWalletModal.style.display = 'none';
+            } else {
+                alert('Invalid wallet address or password');
             }
         });
     </script>
