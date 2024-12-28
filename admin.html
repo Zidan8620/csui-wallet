@@ -3,52 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - $CSUI Wallet</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Admin Panel - $CSUI Wallet</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="admin.html">Admin Panel</a>
-        </nav>
+        <h1>Admin Panel</h1>
     </header>
 
     <main>
-        <section class="admin-login">
-            <h2>Login to Admin Panel</h2>
-            <form id="admin-login-form">
-                <label for="username">Username</label>
-                <input type="text" id="username" required>
-                
-                <label for="password">Password</label>
-                <input type="password" id="password" required>
-                
-                <button type="submit">Login</button>
-            </form>
-            <p id="login-error" class="error-message" style="display: none;">Invalid credentials. Please try again.</p>
-        </section>
-
-        <section id="admin-dashboard" style="display: none;">
+        <div id="admin-dashboard">
             <h2>Admin Dashboard</h2>
-            <p>Admin Wallet Balance: <span id="admin-balance">1000</span> $CSUI</p>
-            <p>Recipient Wallet Balance: <span id="recipient-balance">0</span> $CSUI</p>
-            <button id="logout-btn">Logout</button>
+            <p>Welcome to the $CSUI Wallet Admin Panel.</p>
 
-            <h3>Send $CSUI Tokens</h3>
-            <form id="send-tokens-form">
-                <label for="recipient-address">Recipient Wallet Address</label>
-                <input type="text" id="recipient-address" required>
-
-                <label for="amount">Amount of $CSUI to Send</label>
+            <form id="transaction-form">
+                <label for="to-wallet">Wallet Address</label>
+                <input type="text" id="to-wallet" required>
+                <label for="amount">Amount to Send</label>
                 <input type="number" id="amount" required>
-
-                <button type="submit">Send Tokens</button>
+                <button type="submit">Send Transaction</button>
             </form>
-            <p id="send-error" class="error-message" style="display: none;"></p>
-            <p id="send-success" style="color: green; display: none;">Transaction Sent Successfully!</p>
-        </section>
+        </div>
     </main>
 
     <footer>
@@ -56,9 +31,24 @@
     </footer>
 
     <script>
-        const adminUsername = 'admin';
-        const adminPassword = 'FAQu123';
+        // Basic authentication prompt
+        const password = prompt("Enter the admin password:");
 
-        const loginForm = document.getElementById('admin-login-form');
-        const errorMessage = document.getElementById('login-error');
-        const adminDashboard = document.get
+        // Simple check (Change 'yourpassword' to your actual admin password)
+        if (password !== 'FAQu@123) {
+            alert("Access denied!");
+            window.location.href = "index.html"; // Redirect to the main page
+        }
+
+        // Add your admin functionality here (e.g., sending transactions)
+        document.getElementById('transaction-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const wallet = document.getElementById('to-wallet').value;
+            const amount = document.getElementById('amount').value;
+
+            // Add your transaction logic here (no real backend call for now)
+            alert(`Transaction sent to ${wallet} for ${amount} $CSUI!`);
+        });
+    </script>
+</body>
+</html>
