@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Wallet - $CSUI Wallet</title>
+    <title>Create/View Wallet - $CSUI Wallet</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,18 +21,28 @@
     </header>
 
     <section class="wallet-create">
-        <h1>Create a New Wallet</h1>
-        <form id="create-wallet-form">
+        <h1 id="form-title">Create a New Wallet</h1>
+        <form id="wallet-form">
             <label for="wallet-name">Wallet Name:</label>
             <input type="text" id="wallet-name" placeholder="Enter Wallet Name" required>
             
             <label for="wallet-password">Password:</label>
             <input type="password" id="wallet-password" placeholder="Enter Password" required>
             
-            <label for="confirm-password">Confirm Password:</label>
+            <label for="confirm-password" id="confirm-password-label">Confirm Password:</label>
             <input type="password" id="confirm-password" placeholder="Confirm Password" required>
             
             <button type="submit" class="btn">Create Wallet</button>
+        </form>
+        
+        <form id="existing-wallet-form" style="display:none;">
+            <label for="existing-wallet-name">Wallet Name:</label>
+            <input type="text" id="existing-wallet-name" placeholder="Enter Existing Wallet Name" required>
+            
+            <label for="existing-wallet-password">Password:</label>
+            <input type="password" id="existing-wallet-password" placeholder="Enter Password" required>
+            
+            <button type="submit" class="btn">View Wallet</button>
         </form>
     </section>
 
