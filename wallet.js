@@ -1,21 +1,20 @@
-// wallet.js
-
 document.addEventListener("DOMContentLoaded", function () {
+    // Get URL parameter to decide which form to show
     const urlParams = new URLSearchParams(window.location.search);
-    const isExistingWallet = urlParams.get("view") === "existing";
+    const viewOption = urlParams.get("view");
 
     const walletForm = document.getElementById("wallet-form");
     const existingWalletForm = document.getElementById("existing-wallet-form");
     const formTitle = document.getElementById("form-title");
 
-    // Show the appropriate form based on the URL
-    if (isExistingWallet) {
-        walletForm.style.display = "none";
-        existingWalletForm.style.display = "block";
+    // Show the appropriate form based on the URL (Create or View)
+    if (viewOption === "existing") {
+        walletForm.style.display = "none";  // Hide the 'Create Wallet' form
+        existingWalletForm.style.display = "block";  // Show the 'Existing Wallet' form
         formTitle.textContent = "View Existing Wallet";
-    } else {
-        walletForm.style.display = "block";
-        existingWalletForm.style.display = "none";
+    } else if (viewOption === "create") {
+        walletForm.style.display = "block";  // Show the 'Create Wallet' form
+        existingWalletForm.style.display = "none";  // Hide the 'Existing Wallet' form
         formTitle.textContent = "Create a New Wallet";
     }
 
@@ -33,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (walletName && password) {
-            // Simulate storing the wallet info (e.g., in localStorage, backend, etc.)
             alert(`Wallet '${walletName}' created successfully!`);
+            // You can save the wallet information here (e.g., using localStorage, or your backend logic)
         } else {
             alert("Please fill in all the fields.");
         }
@@ -48,10 +47,5 @@ document.addEventListener("DOMContentLoaded", function () {
         const password = document.getElementById("existing-wallet-password").value;
 
         if (walletName && password) {
-            // Simulate retrieving the wallet info (e.g., from localStorage, backend, etc.)
             alert(`Wallet '${walletName}' accessed successfully!`);
-        } else {
-            alert("Please fill in all the fields.");
-        }
-    });
-});
+            // You can verify the existing wallet details here (e.g
