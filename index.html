@@ -8,118 +8,78 @@
 </head>
 <body>
     <header>
-        <h1>$CSUI Wallet</h1>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="admin.html">Admin Panel</a>
+            <div class="logo">
+                <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="wallet.html">Wallet</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="user-wallet">
-            <h2>Your Wallet</h2>
-            <div id="wallet-info">
-                <p><strong>Wallet Address:</strong> <span id="wallet-address">0x0000000000000000000000000000000000000000</span></p>
-                <p><strong>Balance:</strong> <span id="wallet-balance">0</span> $CSUI</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to $CSUI Wallet</h1>
+            <p>Secure, fast, and easy to use. Manage your $CSUI tokens with ease.</p>
+            <div class="buttons">
+                <a href="wallet.html" class="btn">Create New Wallet</a>
+                <a href="wallet.html" class="btn">View Existing Wallet</a>
             </div>
-            <button id="create-wallet-btn">Create New Wallet</button>
-            <button id="view-wallet-btn">View Existing Wallet</button>
-        </section>
+        </div>
+    </section>
 
-        <!-- Create New Wallet Modal -->
-        <div id="create-wallet-modal" style="display: none;">
-            <h3>Create New Wallet</h3>
-            <form id="create-wallet-form">
-                <label for="new-wallet-password">Password</label>
-                <input type="password" id="new-wallet-password" required>
-                <button type="submit">Create Wallet</button>
+    <section class="features">
+        <div class="feature-card">
+            <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            <h3>Secure Transactions</h3>
+            <p>Protect your assets with robust encryption and security.</p>
+        </div>
+        <div class="feature-card">
+            <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            <h3>Fast Transfers</h3>
+            <p>Experience instant and seamless transactions.</p>
+        </div>
+        <div class="feature-card">
+            <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            <h3>User-Friendly Interface</h3>
+            <p>Manage your wallet with ease on our intuitive platform.</p>
+        </div>
+    </section>
+
+    <!-- Send and Receive Section -->
+    <section class="send-receive">
+        <h2>Send and Receive $CSUI</h2>
+
+        <!-- Send Section -->
+        <div class="send-section">
+            <h3>Send $CSUI</h3>
+            <form id="send-form">
+                <label for="send-wallet-address">To Wallet Address:</label>
+                <input type="text" id="send-wallet-address" placeholder="Enter recipient wallet address" required>
+                <label for="send-amount">Amount:</label>
+                <input type="number" id="send-amount" placeholder="Enter amount to send" required>
+                <button type="submit" class="btn">Send</button>
             </form>
-            <button id="close-create-wallet-modal">Close</button>
         </div>
 
-        <!-- Existing Wallet Modal -->
-        <div id="existing-wallet-modal" style="display: none;">
-            <h3>View Existing Wallet</h3>
-            <form id="existing-wallet-form">
-                <label for="existing-wallet-address">Wallet Address</label>
-                <input type="text" id="existing-wallet-address" required>
-                <label for="existing-wallet-password">Password</label>
-                <input type="password" id="existing-wallet-password" required>
-                <button type="submit">View Wallet</button>
-            </form>
-            <button id="close-existing-wallet-modal">Close</button>
+        <!-- Receive Section -->
+        <div class="receive-section">
+            <h3>Receive $CSUI</h3>
+            <p>Share your wallet address to receive $CSUI.</p>
+            <div class="wallet-address-display">
+                <p><strong>Your Wallet Address:</strong> <span id="your-wallet-address">0x1234567890abcdef</span></p>
+                <button class="btn" onclick="copyAddress()">Copy Address</button>
+            </div>
         </div>
-
-    </main>
+    </section>
 
     <footer>
         <p>&copy; 2024 $CSUI Wallet. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        const createWalletBtn = document.getElementById('create-wallet-btn');
-        const viewWalletBtn = document.getElementById('view-wallet-btn');
-        const createWalletModal = document.getElementById('create-wallet-modal');
-        const existingWalletModal = document.getElementById('existing-wallet-modal');
-        const closeCreateWalletModal = document.getElementById('close-create-wallet-modal');
-        const closeExistingWalletModal = document.getElementById('close-existing-wallet-modal');
-        const walletAddressElem = document.getElementById('wallet-address');
-        const walletBalanceElem = document.getElementById('wallet-balance');
-
-        // For demonstration, simulate wallet data
-        let walletAddress = '0x0000000000000000000000000000000000000000';
-        let walletBalance = 0;
-
-        // Function to simulate wallet creation
-        createWalletBtn.addEventListener('click', function () {
-            createWalletModal.style.display = 'block';
-        });
-
-        // Function to simulate viewing an existing wallet
-        viewWalletBtn.addEventListener('click', function () {
-            existingWalletModal.style.display = 'block';
-        });
-
-        // Close modal for creating a wallet
-        closeCreateWalletModal.addEventListener('click', function () {
-            createWalletModal.style.display = 'none';
-        });
-
-        // Close modal for existing wallet
-        closeExistingWalletModal.addEventListener('click', function () {
-            existingWalletModal.style.display = 'none';
-        });
-
-        // Simulate wallet creation
-        document.getElementById('create-wallet-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const password = document.getElementById('new-wallet-password').value;
-
-            if (password) {
-                walletAddress = '0x' + Math.random().toString(16).slice(2, 42); // Generate random wallet address
-                walletBalance = 1000; // Simulate initial balance
-                walletAddressElem.textContent = walletAddress;
-                walletBalanceElem.textContent = walletBalance;
-
-                createWalletModal.style.display = 'none';
-            }
-        });
-
-        // Simulate viewing an existing wallet
-        document.getElementById('existing-wallet-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const existingWalletAddress = document.getElementById('existing-wallet-address').value;
-            const existingWalletPassword = document.getElementById('existing-wallet-password').value;
-
-            // Simulate checking password and address
-            if (existingWalletAddress === walletAddress && existingWalletPassword) {
-                walletAddressElem.textContent = walletAddress;
-                walletBalanceElem.textContent = walletBalance;
-                existingWalletModal.style.display = 'none';
-            } else {
-                alert('Invalid wallet address or password');
-            }
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
