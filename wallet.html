@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Wallet - $CSUI Wallet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://i.ibb.co/Yy9ShXH/CSUI-logo.png" alt="CSUI Logo">
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="wallet.html">Create Wallet</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="wallet-create">
+        <h1>Create a New Wallet</h1>
+        <form id="create-wallet-form">
+            <label for="wallet-name">Wallet Name:</label>
+            <input type="text" id="wallet-name" placeholder="Enter Wallet Name" required>
+            
+            <label for="wallet-password">Password:</label>
+            <input type="password" id="wallet-password" placeholder="Enter Password" required>
+            
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            
+            <button type="submit" class="btn">Create Wallet</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 $CSUI Wallet. All Rights Reserved.</p>
+    </footer>
+
+    <script src="wallet.js"></script>
+</body>
+</html>
