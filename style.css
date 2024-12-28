@@ -1,145 +1,24 @@
-/* Global Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-header {
-    background-color: #111;
-    padding: 20px;
-    text-align: center;
-}
-
-header nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-header nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-header nav ul li a {
-    color: #fff;
-    font-size: 18px;
-}
-
-header .logo img {
-    width: 50px;
-}
-
-.hero {
-    background: linear-gradient(135deg, #0096FF, #0066cc);
-    color: #fff;
-    padding: 100px 0;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 20px;
-    margin-bottom: 40px;
-}
-
-.hero .buttons {
-    display: flex;
-    justify-content: center;
-}
-
-.hero .buttons .btn {
-    background-color: #ff6600;
-    color: white;
-    padding: 12px 25px;
-    margin: 0 15px;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.hero .buttons .btn:hover {
-    background-color: #e55b00;
-}
-
-.features {
-    display: flex;
-    justify-content: center;
-    padding: 50px 10px;
-    text-align: center;
-}
-
-.feature-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    margin: 0 20px;
-    width: 250px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-}
-
-.feature-card img {
-    width: 50px;
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.feature-card p {
-    font-size: 16px;
-}
-
-footer {
-    background-color: #111;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-}
-
-/* Send and Receive Section */
-.send-receive {
-    background-color: #fff;
+/* Admin Panel Styles */
+.admin-login {
+    background-color: #f9f9f9;
     padding: 50px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 30px 0;
+    margin-top: 50px;
     border-radius: 10px;
 }
 
-.send-receive h2 {
+.admin-login h1 {
     font-size: 32px;
     margin-bottom: 20px;
 }
 
-.send-receive .send-section, .send-receive .receive-section {
-    margin-bottom: 30px;
-}
-
-.send-receive form {
+.admin-login form {
     max-width: 400px;
     margin: 0 auto;
 }
 
-.send-receive input {
+.admin-login input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -147,38 +26,53 @@ footer {
     border: 1px solid #ccc;
 }
 
-.send-receive button {
+.admin-login button {
     background-color: #ff6600;
     color: white;
     padding: 12px 25px;
-    margin: 10px 0;
+    margin-top: 10px;
     font-size: 18px;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-.send-receive button:hover {
+.admin-login button:hover {
     background-color: #e55b00;
 }
 
-.wallet-address-display {
-    margin-top: 20px;
+.admin-dashboard {
+    padding: 50px;
+    text-align: center;
 }
 
-.wallet-address-display span {
-    font-weight: bold;
+.admin-dashboard h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
 }
 
-.wallet-address-display button {
-    background-color: #4caf50;
-    padding: 10px 20px;
-    color: white;
-    border: none;
+.admin-dashboard .admin-actions form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.admin-dashboard .admin-actions input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
     border-radius: 5px;
-    margin-top: 10px;
-    cursor: pointer;
+    border: 1px solid #ccc;
 }
 
-.wallet-address-display button:hover {
-    background-color: #45a049;
+.admin-dashboard .admin-actions button {
+    background-color: #ff6600;
+    color: white;
+    padding: 12px 25px;
+    margin-top: 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.admin-dashboard .admin-actions button:hover {
+    background-color: #e55b00;
 }
