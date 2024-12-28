@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - $CSUI Wallet</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.min.js"></script>
 </head>
 <body>
     <header>
@@ -33,8 +32,8 @@
 
         <section id="admin-dashboard" style="display: none;">
             <h2>Admin Dashboard</h2>
-            <p>Wallet Address: 0x1234567890abcdef1234567890abcdef12345678</p>
-            <p>Balance: 1000 $CSUI</p>
+            <p>Admin Wallet Balance: <span id="admin-balance">1000</span> $CSUI</p>
+            <p>Recipient Wallet Balance: <span id="recipient-balance">0</span> $CSUI</p>
             <button id="logout-btn">Logout</button>
 
             <h3>Send $CSUI Tokens</h3>
@@ -58,86 +57,8 @@
 
     <script>
         const adminUsername = 'admin';
-        const adminPassword = 'FAQu@123';
-        const adminWalletPrivateKey = 'YOUR_ADMIN_WALLET_PRIVATE_KEY'; // Admin's private key for sending tokens
-        const tokenContractAddress = 'YOUR_TOKEN_CONTRACT_ADDRESS'; // Address of the $CSUI token contract
-        const tokenABI = [
-            // ERC-20 Token ABI (you can replace this with your actual token contract ABI)
-            "function transfer(address recipient, uint256 amount) public returns (bool)"
-        ];
+        const adminPassword = 'FAQu123';
 
         const loginForm = document.getElementById('admin-login-form');
         const errorMessage = document.getElementById('login-error');
-        const adminDashboard = document.getElementById('admin-dashboard');
-        const logoutBtn = document.getElementById('logout-btn');
-        const sendTokensForm = document.getElementById('send-tokens-form');
-        const sendErrorMessage = document.getElementById('send-error');
-        const sendSuccessMessage = document.getElementById('send-success');
-
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === adminUsername && password === adminPassword) {
-                loginForm.style.display = 'none';
-                adminDashboard.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'block';
-            }
-        });
-
-        logoutBtn.addEventListener('click', function () {
-            loginForm.style.display = 'block';
-            adminDashboard.style.display = 'none';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-        });
-
-        sendTokensForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const recipientAddress = document.getElementById('recipient-address').value;
-            const amount = document.getElementById('amount').value;
-
-            if (!ethers.utils.isAddress(recipientAddress)) {
-                sendErrorMessage.style.display = 'block';
-                sendErrorMessage.textContent = 'Invalid recipient address!';
-                return;
-            }
-
-            if (isNaN(amount) || amount <= 0) {
-                sendErrorMessage.style.display = 'block';
-                sendErrorMessage.textContent = 'Invalid amount!';
-                return;
-            }
-
-            try {
-                // Set up the provider and wallet
-                const provider = ethers.getDefaultProvider('mainnet'); // Change to appropriate network
-                const adminWallet = new ethers.Wallet(adminWalletPrivateKey, provider);
-
-                // Connect to the token contract
-                const tokenContract = new ethers.Contract(tokenContractAddress, tokenABI, adminWallet);
-
-                // Calculate the token amount (convert from decimals if needed)
-                const decimals = 18; // Assuming $CSUI token has 18 decimals
-                const amountInWei = ethers.utils.parseUnits(amount, decimals);
-
-                // Send the transaction
-                const tx = await tokenContract.transfer(recipientAddress, amountInWei);
-                await tx.wait();
-
-                // Show success message
-                sendSuccessMessage.style.display = 'block';
-                sendErrorMessage.style.display = 'none';
-            } catch (error) {
-                sendErrorMessage.style.display = 'block';
-                sendErrorMessage.textContent = 'Transaction failed. ' + error.message;
-                sendSuccessMessage.style.display = 'none';
-            }
-        });
-    </script>
-</body>
-</html>
+        const adminDashboard = document.get
